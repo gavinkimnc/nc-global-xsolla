@@ -34,14 +34,9 @@ public class PaymentConroller {
         return "redirect:" + String.format("https://sandbox-secure.xsolla.com/paystation3/?access_token=%s", accessToken);
     }
 
-    @PostMapping("/")
-    public String webhook(@RequestBody WebhookReq request) {
-        String notiType = request.getNotificationType();
-        return notiType;
+    @PostMapping("/webhook")
+    public String webhook(HttpServletRequest request, HttpServletResponse response) {
+        return "TEst";
     }
 
-    @GetMapping("/")
-    public String webhook(HttpServletRequest request, HttpServletResponse response) {
-        return "test";
-    }
 }
