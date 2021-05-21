@@ -40,13 +40,15 @@ public class PaymentConroller {
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
         if (!"ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
-            return new ResponseEntity("INVALID_USER",HttpStatus.NOT_FOUND);
+            return new ResponseEntity(Error.builder()
+                    .code("INVALID_USER")
+                    .build(),HttpStatus.NOT_FOUND);
         }
         String token = request.getHeader("Authorization");
-        if(token.startsWith("Signature ")){
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        if("ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return ResponseEntity.ok("ok");
+        return new ResponseEntity(Error.builder().code("INVALID_SIGNATURE ").build(),HttpStatus.BAD_REQUEST);
     }
 
 }
