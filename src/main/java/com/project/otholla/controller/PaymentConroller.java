@@ -39,15 +39,17 @@ public class PaymentConroller {
     @PostMapping("/webhook")
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
-        String error = "{\"code\":\"INVALID_USER\",\"message\":null}";
+        String invalid = "{\"code\":\"INVALID_USER\",\"message\":null}";
         if (!"ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
-            return new ResponseEntity(error,HttpStatus.NOT_FOUND);
+            return new ResponseEntity(invalid,HttpStatus.NOT_FOUND);
         }
         String token = request.getHeader("Authorization");
         if("ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
             return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity(error,HttpStatus.BAD_REQUEST);
+
+        String eddd = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
+        return new ResponseEntity(eddd,HttpStatus.BAD_REQUEST);
     }
 
 }
