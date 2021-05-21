@@ -65,7 +65,7 @@ public class PaymentConroller {
     }
 
     private boolean validSignatre(String body, String hash){
-        String signature = Hashing.sha1().hashString(bod + secretKey , Charsets.UTF_8 ).toString();
+        String signature = Hashing.sha1().hashString(body + secretKey , Charsets.UTF_8 ).toString();
         return hash.equalsIgnoreCase(signature);
     }
 
