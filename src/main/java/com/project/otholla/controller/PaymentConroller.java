@@ -1,7 +1,5 @@
 package com.project.otholla.controller;
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.Hashing;
 import com.project.otholla.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -24,6 +24,8 @@ public class PaymentConroller {
     PaymentService paymentService;
 
     String secretKey = "45107c6b-9dac-463e-add9-46d44ace14bc";
+    String invalidUser = "{ \"error\":{\"code\":\"INVALID_USER\",\"message\":null}}";
+    String invalidSignature = "{ \"error\":{\"code\":\"INVALID_SIGNATURE\",\"message\":null}}";
 
     @GetMapping("oshop")
     public String oshop() {
@@ -44,32 +46,43 @@ public class PaymentConroller {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         log.info("requestwebhook : {}", requestwebhook);
+        String signature = request.getHeader("Authorization");
+        String body = readBody(request);
+        log.info("signature: {}, body: {}", signature, body);
+        if("user_validation".equalsIgnoreCase(requestwebhook.getNotificationType())) {
+            return validId(requestwebhook.getUsers().getId());
+        }
 
+        if("payment".equalsIgnoreCase(requestwebhook.getNotificationType())) {
+            return paymentValidSignature(body,signature);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
-        String invalidUser = "{ \"error\":{\"code\":\"INVALID_USER\",\"message\":null}}";
-        String invalidSignature = "{ \"error\":{\"code\":\"INVALID_SIGNATURE\",\"message\":null}}";
-
-        String signature = request.getHeader("Signature ");
-
-        log.info("{}", requestwebhook.toString());
-
-        if (!validId(requestwebhook.getUsers().getId())){
-            return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
-        } else if(!validSignatre(requestwebhook.toString(), signature)){
-            return new ResponseEntity(invalidSignature,HttpStatus.UNAUTHORIZED);
-        } else {
+    private ResponseEntity validId(String id){
+        if("ncsoft".equalsIgnoreCase(id)) {
             return new ResponseEntity(HttpStatus.OK);
         }
+        return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
     }
 
-    private boolean validId(String id){
-        return "ncsoft".equalsIgnoreCase(id);
+    private ResponseEntity paymentValidSignature(String body, String signature){
+        try {
+            String hash = sha1(body+ secretKey);
+            log.info(">>>> hashed: {}", hash);
+            if(hash.equalsIgnoreCase(signature)) {
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            log.error(">>>>> : {}", e.getMessage());
+        }
+        return new ResponseEntity(invalidSignature, HttpStatus.BAD_REQUEST);
     }
 
-    private boolean validSignatre(String body, String signature) {
+    private boolean validSignature(String body, String signature) {
 
         try {
             String hash = sha1(body+ secretKey);
@@ -93,10 +106,18 @@ public class PaymentConroller {
         return sb.toString();
     }
 
-    public static void main(String[] args) throws NoSuchAlgorithmException{
-        String body = "{\"notification_type\":\"user_validation\",\"settings\":{\"project_id\":132058,\"merchant_id\":202724},\"user\":{\"id\":\"ncsoft\"}}";
-        String hashed = sha1(body+"45107c6b-9dac-463e-add9-46d44ace14bc");
-        System.out.println(hashed);
+
+    public static String readBody(HttpServletRequest request) throws IOException {
+        BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        StringBuilder builder = new StringBuilder();
+        String buffer;
+        while ((buffer = input.readLine()) != null) {
+            if (builder.length() > 0) {
+                builder.append("\n");
+            }
+            builder.append(buffer);
+        }
+        return builder.toString();
     }
 
 }
