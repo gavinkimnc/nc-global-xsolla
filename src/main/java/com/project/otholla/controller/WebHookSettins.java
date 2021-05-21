@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class WebHookSettins {
 
     @JsonProperty(value = "project_id")
-    private String projectId;
+    private int projectId;
     @JsonProperty(value = "merchant_id")
-    private String merchantId;
+    private int merchantId;
 }
