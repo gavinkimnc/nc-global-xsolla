@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<!-- // NCoin Common JS -->
+<p th:text="OVENGERSSHOP">
+
+<form th:action="@{/payment}">
+
+    <label th:text="사용자명" th:for="myname">이름</label>
+    <input type="text" name="myname" th:id="myname" value="오브제" />
+    <br/>
+
+    <label th:text="통화" th:for="amount">가격</label>
+    <input type="text" name="currency" th:id="currency" value="KRW" />
+    <br/>
+
+    <label th:text="가격" th:for="amount">가격</label>
+    <input type="text" name="amount" th:id="amount" value="1000" />
+    <br/>
+
+    <label th:text="국가" th:for="amount">이름</label>
+    <input type="text" name="country" th:id="country" value="KR" />
+    <br/>
+
+    <input type="submit" />
+
+</form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+2021-05-07 14:15:46.127  INFO 50264 --- [main] OthollaApplication     : Starting OthollaApplication using Java 14.0.2 on FUGA-PC with PID 50264 (D:\GitWorkSpace\otholla\target\classes started by fuga in D:\GitWorkSpace\otholla)
+2021-05-07 14:15:46.130  INFO 50264 --- [main] OthollaApplication     : No active profile set, falling back to default profiles: default
+2021-05-07 14:15:46.758  INFO 50264 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-05-07 14:15:46.765  INFO 50264 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-05-07 14:15:46.765  INFO 50264 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-07 14:15:46.865  INFO 50264 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-05-07 14:15:46.866  INFO 50264 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 702 ms
+2021-05-07 14:15:47.122  INFO 50264 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-07 14:15:47.163  INFO 50264 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-05-07 14:15:47.248  INFO 50264 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-07 14:15:47.256  INFO 50264 --- [main] OthollaApplication     : Started OthollaApplication in 1.46 seconds (JVM running for 2.005)
+2021-05-07 14:16:53.830  INFO 36976 --- [main] OthollaApplication     : Starting OthollaApplication using Java 14.0.2 on FUGA-PC with PID 36976 (D:\GitWorkSpace\otholla\target\classes started by fuga in D:\GitWorkSpace\otholla)
+2021-05-07 14:16:53.832  INFO 36976 --- [main] OthollaApplication     : No active profile set, falling back to default profiles: default
+2021-05-07 14:16:54.547  INFO 36976 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-05-07 14:16:54.554  INFO 36976 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-05-07 14:16:54.555  INFO 36976 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-07 14:16:54.672  INFO 36976 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-05-07 14:16:54.672  INFO 36976 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 805 ms
+2021-05-07 14:16:54.912  INFO 36976 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-07 14:16:54.957  INFO 36976 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-05-07 14:16:55.066  INFO 36976 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-07 14:16:55.075  INFO 36976 --- [main] OthollaApplication     : Started OthollaApplication in 1.52 seconds (JVM running for 2.291)
+2021-05-07 14:17:03.983  INFO 36976 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-07 14:17:03.983  INFO 36976 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-05-07 14:17:03.984  INFO 36976 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
