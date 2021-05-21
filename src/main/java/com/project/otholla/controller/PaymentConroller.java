@@ -49,8 +49,8 @@ public class PaymentConroller {
         log.info("requestwebhook : {}", requestwebhook);
 
 
-        String invalidUser = "{\"code\":\"INVALID_USER\",\"message\":null}";
-        String invalidSignature = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
+        String invalidUser = "{ \"error\":{\"code\":\"INVALID_USER\",\"message\":null}}";
+        String invalidSignature = "{ \"error\":{\"code\":\"INVALID_SIGNATURE\",\"message\":null}}";
 
         String signature = request.getHeader("Signature ");
 
