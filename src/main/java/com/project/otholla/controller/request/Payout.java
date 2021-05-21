@@ -12,7 +12,7 @@ public class Payout {
     @JsonProperty("currency")
     public String currency;
     @JsonProperty("amount")
-    public Integer amount;
+    public Float amount;
 
 
 }
