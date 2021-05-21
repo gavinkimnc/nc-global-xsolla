@@ -46,9 +46,11 @@ public class PaymentConroller {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody WebHookReq2 requestwebhook, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity webhook(@RequestBody WebHookReq2 requestwebhook, @RequestBody String str, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         log.info("requestwebhook : {}", requestwebhook);
+        log.info("body : {}", str);
+
         String signature = request.getHeader("Authorization");
         log.info("signature: {}", signature);
         if("user_validation".equalsIgnoreCase(requestwebhook.getNotificationType())) {
