@@ -57,7 +57,7 @@ public class PaymentService {
         String param = "  {\n" +
                 "  \"purchase\": {\n" +
                 "    \"virtual_currency\": {\n" +
-                "      \"quantity\": 100\n" +
+                "      \"quantity\": 1\n" +
                 "    },\n" +
                 "    \"virtual_items\": {\n" +
                 "      \"items\": [\n" +
@@ -98,7 +98,7 @@ public class PaymentService {
                 "      \"value\": \"fuga@ncsoft.com\"\n" +
                 "    },\n" +
                 "    \"id\": {\n" +
-                "      \"value\": \"fugancsoftcom\"\n" +
+                "      \"value\": \"ncsoft\"\n" +
                 "    },\n" +
                 "    \"name\": {\n" +
                 "      \"value\": \"" + myname + "\"\n" +
