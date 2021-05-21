@@ -14,9 +14,6 @@ public class WebhookReq {
     @JsonProperty(value = "notification_type")
     private String notificationType;
 
-    @JsonProperty(value = "user_validation")
-    private String userValidation;
-
     @JsonProperty(value = "user")
     private WebHookUser users;
 
