@@ -21,6 +21,8 @@ public class PaymentConroller {
     @Autowired
     PaymentService paymentService;
 
+    String secretKey = "U-CWaZHflG80f5KKMn__B";
+
     @GetMapping("oshop")
     public String oshop() {
         return "oshop";
@@ -44,11 +46,14 @@ public class PaymentConroller {
 
         String invalidUser = "{\"code\":\"INVALID_USER\",\"message\":null}";
         String invalidSignature = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
-        String hash = request.getHeader("Signature ");
+
+        String signature = request.getHeader("Signature ");
+
+        log.info("{}", requestwebhook.toString());
 
         if (!validId(requestwebhook.getUsers().getId())){
             return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
-        } else if(!validToken(hash)){
+        } else if(!validSignatre(requestwebhook.toString(), signature)){
             return new ResponseEntity(invalidSignature,HttpStatus.UNAUTHORIZED);
         } else {
             return new ResponseEntity(HttpStatus.OK);
@@ -59,9 +64,8 @@ public class PaymentConroller {
         return "ncsoft".equalsIgnoreCase(id);
     }
 
-    private boolean validToken(String hash){
-        String body = "{\"notification_type\":\"user_search\",\"settings\":{\"project_id\":132058,\"merchant_id\":202724},\"user\":{\"public_id\":\"11111\"}}";
-        String signature = Hashing.sha1().hashString(body+"U-CWaZHflG80f5KKMn__B" , Charsets.UTF_8 ).toString();
+    private boolean validSignatre(String body, String hash){
+        String signature = Hashing.sha1().hashString(bod + secretKey , Charsets.UTF_8 ).toString();
         return hash.equalsIgnoreCase(signature);
     }
 
