@@ -79,7 +79,7 @@ public class PaymentConroller {
     }
 
 
-    private static String sha1(String input) throws NoSuchAlgorithmException {
+    public static String sha1(String input) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
         byte[] result = mDigest.digest(input.getBytes());
         StringBuffer sb = new StringBuffer();
