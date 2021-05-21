@@ -30,7 +30,7 @@ public class PaymentConroller {
         return "redirect:" + String.format("https://sandbox-secure.xsolla.com/paystation3/?access_token=%s", accessToken);
     }
 
-    @PostMapping("/oshop/webhook")
+    @PostMapping("/")
     public String webhook(@RequestBody WebhookReq request) {
         String notiType = request.getNotificationType();
         return notiType;
