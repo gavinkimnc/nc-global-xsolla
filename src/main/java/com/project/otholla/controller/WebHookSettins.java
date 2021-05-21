@@ -10,16 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WebhookReq {
-    @JsonProperty(value = "notification_type")
-    private String notificationType;
+public class WebHookSettins {
 
-    @JsonProperty(value = "user_validation")
-    private String userValidation;
-
-    @JsonProperty(value = "user")
-    private WebHookUser users;
-
-    @JsonProperty(value = "settings")
-    private WebHookSettins settings;
+    @JsonProperty(value = "project_id")
+    private String projectId;
+    @JsonProperty(value = "merchant_id")
+    private String merchantId;
 }

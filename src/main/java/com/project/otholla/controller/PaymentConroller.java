@@ -93,4 +93,10 @@ public class PaymentConroller {
         return sb.toString();
     }
 
+    public static void main(String[] args) throws NoSuchAlgorithmException{
+        String body = "{\"notification_type\":\"user_validation\",\"settings\":{\"project_id\":132058,\"merchant_id\":202724},\"user\":{\"id\":\"ncsoft\"}}";
+        String hashed = sha1(body+"45107c6b-9dac-463e-add9-46d44ace14bc");
+        System.out.println(hashed);
+    }
+
 }
