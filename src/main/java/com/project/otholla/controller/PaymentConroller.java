@@ -1,5 +1,6 @@
 package com.project.otholla.controller;
 
+import com.project.otholla.controller.request.WebHookReq2;
 import com.project.otholla.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,17 @@ public class PaymentConroller {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity webhook(@RequestBody WebHookReq2 requestwebhook, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         log.info("requestwebhook : {}", requestwebhook);
         String signature = request.getHeader("Authorization");
-        String body = getBody(request);
-        log.info("signature: {}, body: {}", signature, body);
+        log.info("signature: {}", signature);
         if("user_validation".equalsIgnoreCase(requestwebhook.getNotificationType())) {
-            return validId(requestwebhook.getUsers().getId());
+            return validId(requestwebhook.getUser().getId());
         }
 
         if("payment".equalsIgnoreCase(requestwebhook.getNotificationType())) {
-            return paymentValidSignature(body,signature);
+            return paymentValidSignature(requestwebhook.toString(),signature);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -105,39 +105,6 @@ public class PaymentConroller {
         }
 
         return sb.toString();
-    }
-
-
-    private String getBody(HttpServletRequest request) throws IOException {
-
-        String body = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader bufferedReader = null;
-
-        try {
-            InputStream inputStream = request.getInputStream();
-            if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                char[] charBuffer = new char[128];
-                int bytesRead = -1;
-                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-                    stringBuilder.append(charBuffer, 0, bytesRead);
-                }
-            }
-        } catch (IOException ex) {
-            throw ex;
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ex) {
-                    throw ex;
-                }
-            }
-        }
-
-        body = stringBuilder.toString();
-        return body;
     }
 
 }
