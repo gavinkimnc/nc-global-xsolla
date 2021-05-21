@@ -44,6 +44,9 @@ public class PaymentConroller {
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
 
+        log.info("requestwebhook : {}", requestwebhook);
+
+
         String invalidUser = "{\"code\":\"INVALID_USER\",\"message\":null}";
         String invalidSignature = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
 
