@@ -57,7 +57,7 @@ public class PaymentService {
         String param = "  {\n" +
                 "  \"purchase\": {\n" +
                 "    \"virtual_currency\": {\n" +
-                "      \"quantity\": 100\n" +
+                "      \"quantity\": 1\n" +
                 "    },\n" +
                 "    \"virtual_items\": {\n" +
                 "      \"items\": [\n" +
