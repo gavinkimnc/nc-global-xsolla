@@ -44,6 +44,13 @@ public class PaymentConroller {
         return "redirect:" + String.format("https://sandbox-secure.xsolla.com/paystation3/?access_token=%s", accessToken);
     }
 
+    @GetMapping("/success")
+    @ResponseBody
+    public String webhook(HttpServletRequest request, HttpServletResponse response) {
+
+        return "index";
+    }
+
     @PostMapping("/webhook")
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebHookReq2 requestwebhook, HttpServletRequest request, HttpServletResponse response) throws IOException {

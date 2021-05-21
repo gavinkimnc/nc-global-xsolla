@@ -98,10 +98,10 @@ public class PaymentService {
                 "      \"value\": \"fuga@ncsoft.com\"\n" +
                 "    },\n" +
                 "    \"id\": {\n" +
-                "      \"value\": \"fugancsoftcom\"\n" +
+                "      \"value\": \"ncsoft\"\n" +
                 "    },\n" +
                 "    \"name\": {\n" +
-                "      \"value\": \"" + myname + "\"\n" +
+                "      \"value\": \"" + "gavinkim" + "\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";
