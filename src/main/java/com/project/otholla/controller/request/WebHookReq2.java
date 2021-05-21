@@ -10,6 +10,8 @@ import java.util.HashMap;
         import com.fasterxml.jackson.annotation.JsonProperty;
         import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -22,8 +24,9 @@ import lombok.ToString;
         "payment_details"
 })
 @Generated("jsonschema2pojo")
-@ToString
-@Data
+@Getter
+@Setter
+@ToString(exclude = "additionalProperties")
 public class WebHookReq2 {
 
     @JsonProperty("notification_type")

@@ -25,7 +25,7 @@ public class PaymentConroller {
     @Autowired
     PaymentService paymentService;
 
-    String secretKey = "45107c6b-9dac-463e-add9-46d44ace14bc";
+    String secretKey = "U-CWaZHflG80f5KKMn__B";
     String invalidUser = "{ \"error\":{\"code\":\"INVALID_USER\",\"message\":null}}";
     String invalidSignature = "{ \"error\":{\"code\":\"INVALID_SIGNATURE\",\"message\":null}}";
 
