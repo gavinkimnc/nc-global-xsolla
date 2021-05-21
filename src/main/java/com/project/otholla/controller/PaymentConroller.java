@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Slf4j
 @Controller
 public class PaymentConroller {
@@ -34,5 +38,10 @@ public class PaymentConroller {
     public String webhook(@RequestBody WebhookReq request) {
         String notiType = request.getNotificationType();
         return notiType;
+    }
+
+    @GetMapping("/")
+    public String webhook(HttpServletRequest request, HttpServletResponse response) {
+        return "test";
     }
 }
