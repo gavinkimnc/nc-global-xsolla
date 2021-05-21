@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @Slf4j
 @Controller
@@ -67,9 +69,25 @@ public class PaymentConroller {
         return "ncsoft".equalsIgnoreCase(id);
     }
 
-    private boolean validSignatre(String body, String hash){
-        String signature = Hashing.sha1().hashString(body + secretKey , Charsets.UTF_8 ).toString();
-        return hash.equalsIgnoreCase(signature);
+    private boolean validSignatre(String body, String signature) {
+
+        try {
+            return sha1(body+ secretKey).equals(signature);
+        } catch (Exception NoSuchAlgorithmException){
+            return false;
+        }
+    }
+
+
+    private static String sha1(String input) throws NoSuchAlgorithmException {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
     }
 
 }
