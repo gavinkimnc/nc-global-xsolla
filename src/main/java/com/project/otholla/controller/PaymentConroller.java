@@ -108,7 +108,7 @@ public class PaymentConroller {
     }
 
 
-    public static String getBody(HttpServletRequest request) throws IOException {
+    private String getBody(HttpServletRequest request) throws IOException {
 
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
