@@ -23,7 +23,7 @@ public class PaymentConroller {
     @Autowired
     PaymentService paymentService;
 
-    String secretKey = "U-CWaZHflG80f5KKMn__B";
+    String secretKey = "45107c6b-9dac-463e-add9-46d44ace14bc";
 
     @GetMapping("oshop")
     public String oshop() {
