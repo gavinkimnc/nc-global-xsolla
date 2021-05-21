@@ -1,5 +1,7 @@
 package com.project.otholla.controller;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import com.project.otholla.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +41,28 @@ public class PaymentConroller {
     @PostMapping("/webhook")
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
-        String invalid = "{\"code\":\"INVALID_USER\",\"message\":null}";
-        if (!"ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
-            return new ResponseEntity(invalid,HttpStatus.NOT_FOUND);
-        }
-        String token = request.getHeader("Authorization");
-        if("ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
+
+        String invalidUser = "{\"code\":\"INVALID_USER\",\"message\":null}";
+        String invalidSignature = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
+        String hash = request.getHeader("Signature ");
+
+        if (!validId(requestwebhook.getUsers().getId())){
+            return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
+        } else if(!validToken(hash)){
+            return new ResponseEntity(invalidSignature,HttpStatus.UNAUTHORIZED);
+        } else {
             return new ResponseEntity(HttpStatus.OK);
         }
+    }
 
-        String eddd = "{\"code\":\"INVALID_SIGNATURE\",\"message\":null}";
-        return new ResponseEntity(eddd,HttpStatus.BAD_REQUEST);
+    private boolean validId(String id){
+        return "ncsoft".equalsIgnoreCase(id);
+    }
+
+    private boolean validToken(String hash){
+        String body = "{\"notification_type\":\"user_search\",\"settings\":{\"project_id\":132058,\"merchant_id\":202724},\"user\":{\"public_id\":\"11111\"}}";
+        String signature = Hashing.sha1().hashString(body+"U-CWaZHflG80f5KKMn__B" , Charsets.UTF_8 ).toString();
+        return hash.equalsIgnoreCase(signature);
     }
 
 }
