@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,7 +61,8 @@ public class PaymentConroller {
 
         if("payment".equalsIgnoreCase(requestwebhook.getNotificationType())) {
             ObjectMapper objectMapper= new ObjectMapper();
-            String body = objectMapper.writeValueAsString(requestwebhook);
+            final ContentCachingRequestWrapper cachingRequest = (ContentCachingRequestWrapper) request;
+            String body = objectMapper.readTree(cachingRequest.getContentAsByteArray()).toString();
             log.info("BODY: {}", body);
             return paymentValidSignature(body,signature);
         }
