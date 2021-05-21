@@ -1,37 +1,11 @@
 package com.project.otholla.controller.request;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString(exclude = "additionalProperties")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "payment",
-        "payment_method_sum",
-        "xsolla_balance_sum",
-        "payout",
-        "xsolla_fee",
-        "payment_method_fee",
-        "vat",
-        "sales_tax",
-        "direct_wht",
-        "payout_currency_rate",
-        "repatriation_commission"
-})
-@Generated("jsonschema2pojo")
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PaymentDetails {
 
     @JsonProperty("payment")
@@ -56,17 +30,5 @@ public class PaymentDetails {
     public String payoutCurrencyRate;
     @JsonProperty("repatriation_commission")
     public RepatriationCommission repatriationCommission;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

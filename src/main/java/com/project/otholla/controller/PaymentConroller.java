@@ -9,14 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -61,9 +57,8 @@ public class PaymentConroller {
 
         if("payment".equalsIgnoreCase(requestwebhook.getNotificationType())) {
             ObjectMapper objectMapper= new ObjectMapper();
-            final ContentCachingRequestWrapper cachingRequest = (ContentCachingRequestWrapper) request;
-            String body = objectMapper.readTree(cachingRequest.getContentAsByteArray()).toString();
-            log.info("BODY: {}", body);
+            String body = objectMapper.writeValueAsString(requestwebhook);
+            log.info("BODY: {}",body);
             return paymentValidSignature(body,signature);
         }
         return new ResponseEntity(HttpStatus.OK);
