@@ -16,4 +16,7 @@ public class WebhookReq {
 
     @JsonProperty(value = "user_validation")
     private String userValidation;
+
+    @JsonProperty(value = "user")
+    private WebHookUser users;
 }
