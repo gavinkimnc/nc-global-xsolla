@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -50,7 +51,7 @@ public class PaymentConroller {
 
         log.info("requestwebhook : {}", requestwebhook);
         String signature = request.getHeader("Authorization");
-        String body = readBody(request);
+        String body = getBody(request);
         log.info("signature: {}, body: {}", signature, body);
         if("user_validation".equalsIgnoreCase(requestwebhook.getNotificationType())) {
             return validId(requestwebhook.getUsers().getId());
@@ -107,17 +108,36 @@ public class PaymentConroller {
     }
 
 
-    public static String readBody(HttpServletRequest request) throws IOException {
-        BufferedReader input = new BufferedReader(new InputStreamReader(request.getInputStream()));
-        StringBuilder builder = new StringBuilder();
-        String buffer;
-        while ((buffer = input.readLine()) != null) {
-            if (builder.length() > 0) {
-                builder.append("\n");
+    public static String getBody(HttpServletRequest request) throws IOException {
+
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
             }
-            builder.append(buffer);
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
         }
-        return builder.toString();
+
+        body = stringBuilder.toString();
+        return body;
     }
 
 }
