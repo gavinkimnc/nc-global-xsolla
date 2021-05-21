@@ -3,6 +3,7 @@ package com.project.otholla.controller;
 import com.project.otholla.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,9 @@ public class PaymentConroller {
     }
 
     @PostMapping("/webhook")
-    public String webhook(HttpServletRequest request, HttpServletResponse response) {
-        return "TEst";
+    @ResponseBody
+    public ResponseEntity webhook(HttpServletRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok("ok");
     }
 
 }
