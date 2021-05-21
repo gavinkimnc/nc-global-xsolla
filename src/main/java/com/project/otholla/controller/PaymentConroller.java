@@ -44,25 +44,26 @@ public class PaymentConroller {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, @RequestBody String str,HttpServletRequest request, HttpServletResponse response) {
 
         log.info("requestwebhook : {}", requestwebhook);
-
+        log.info("str : {}", str);
 
         String invalidUser = "{ \"error\":{\"code\":\"INVALID_USER\",\"message\":null}}";
         String invalidSignature = "{ \"error\":{\"code\":\"INVALID_SIGNATURE\",\"message\":null}}";
 
         String signature = request.getHeader("Signature ");
 
-        log.info("{}", requestwebhook.toString());
+
 
         if (!validId(requestwebhook.getUsers().getId())){
             return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
         } else if(!validSignatre(requestwebhook.toString(), signature)){
             return new ResponseEntity(invalidSignature,HttpStatus.UNAUTHORIZED);
-        } else {
-            return new ResponseEntity(HttpStatus.OK);
         }
+
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 
     private boolean validId(String id){
