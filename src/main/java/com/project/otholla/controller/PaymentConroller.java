@@ -1,5 +1,6 @@
 package com.project.otholla.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.otholla.controller.request.WebHookReq2;
 import com.project.otholla.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +59,10 @@ public class PaymentConroller {
         }
 
         if("payment".equalsIgnoreCase(requestwebhook.getNotificationType())) {
-            return paymentValidSignature(requestwebhook.toString(),signature);
+            ObjectMapper objectMapper= new ObjectMapper();
+            String body = objectMapper.writeValueAsString(requestwebhook);
+            log.info("BODY: {}", body);
+            return paymentValidSignature(body,signature);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
