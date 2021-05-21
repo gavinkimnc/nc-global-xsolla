@@ -45,7 +45,6 @@ public class PaymentConroller {
     }
 
     @GetMapping("/success")
-    @ResponseBody
     public String webhook(HttpServletRequest request, HttpServletResponse response) {
 
         return "index";
@@ -73,7 +72,8 @@ public class PaymentConroller {
     }
 
     private ResponseEntity validId(String id){
-        if("ncsoft".equalsIgnoreCase(id)) {
+
+        if(id.startsWith("ncsoft")) {
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(invalidUser,HttpStatus.NOT_FOUND);
