@@ -74,7 +74,7 @@ public class PaymentConroller {
 
     private ResponseEntity paymentValidSignature(String body, String signature){
         try {
-            String hash = sha1(body+ secretKey);
+            String hash = "Signature " + sha1(body+ secretKey);
             log.info(">>>> hashed: {}", hash);
             if(hash.equalsIgnoreCase(signature)) {
                 return new ResponseEntity(HttpStatus.OK);
@@ -88,7 +88,7 @@ public class PaymentConroller {
     private boolean validSignature(String body, String signature) {
 
         try {
-            String hash = sha1(body+ secretKey);
+            String hash = "Signature "+sha1(body+ secretKey);
             log.info(">>>> hashed: {}", hash);
             return hash.equalsIgnoreCase(signature);
         } catch (NoSuchAlgorithmException e) {
