@@ -40,7 +40,11 @@ public class PaymentConroller {
     @ResponseBody
     public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
         if (!"ncsoft".equalsIgnoreCase(requestwebhook.getUsers().getId())){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        String token = request.getHeader("Authorization");
+        if(token.startsWith("Signature ")){
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
         return ResponseEntity.ok("ok");
     }
