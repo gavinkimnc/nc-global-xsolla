@@ -37,7 +37,7 @@ public class PaymentConroller {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity webhook(@RequestBody WebhookReq requestwebhook, HttpServletRequest request, HttpServletResponse response) {
         return ResponseEntity.ok("ok");
     }
 
