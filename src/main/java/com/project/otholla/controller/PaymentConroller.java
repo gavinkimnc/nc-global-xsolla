@@ -72,8 +72,11 @@ public class PaymentConroller {
     private boolean validSignatre(String body, String signature) {
 
         try {
-            return sha1(body+ secretKey).equals(signature);
-        } catch (Exception NoSuchAlgorithmException){
+            String hash = sha1(body+ secretKey);
+            log.info(">>>> hashed: {}", hash);
+            return hash.equalsIgnoreCase(signature);
+        } catch (NoSuchAlgorithmException e) {
+            log.error(">>>>> : {}", e.getMessage());
             return false;
         }
     }
