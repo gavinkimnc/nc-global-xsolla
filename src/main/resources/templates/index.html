@@ -28,7 +28,36 @@
             }
         }
     </style>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
 
+        $( document ).ready(function() {
+
+            var currencyRate = {'USD': 1,  'EUR' : 0.8 , 'KRW' : 1500, '' : 0};
+            var currencySymbol = {'USD': '$',  'EUR' : '€' , 'KRW' : '\\', '': ''};
+            function displayAmount(amount, currency) {
+
+                $(".ocoinAmount").text(amount);
+                $(".currencySymbol").text(currencySymbol[currency]);
+
+                var paymentAmount =  amount * currencyRate[currency];
+                $(".paymentAmount").text( currency == "EUR"? paymentAmount.toFixed(1) : paymentAmount);
+
+            }
+
+            $("#amount").change(function() {
+                var currency = $("#currency").val();
+                displayAmount($( this ).val(), currency)
+            });
+
+            $("#currency").change(function() {
+                var amount = $("#amount").val();
+                displayAmount(amount, $( this ).val())
+            });
+
+        });
+
+    </script>
 
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.0/examples/checkout/form-validation.css" rel="stylesheet">
@@ -36,21 +65,45 @@
 <body class="bg-light">
 
 <div class="container">
+
     <main>
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="https://wstatic-cdn.plaync.com/nshop2/v3/nshop/image/sprite/icoCoin2020.png" alt="" >
-            <h2>오벤져스 충전 센터</h2>
-            <p class="lead"></p>
+            <h2>Ovengers Coin Center</h2>
+            <p class="lead"><strong>Exchange Rate</strong> : <br/>1 OCoin = 1$ = 0.8€ = 1,500\</p>
         </div>
 
         <div class="row g-5">
+
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your order</span>
+
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0"><span class="ocoinAmount">0</span> OCoin</h6>
+                            <small class="text-muted"></small>
+                        </div>
+                        <span class="text-muted"><span class="currencySymbol">$</span><span class="paymentAmount">0</span></span>
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong><span class="currencySymbol"></span><span class="paymentAmount">0</span></strong>
+                    </li>
+                </ul>
+
+            </div>
+
 
             <div class="col-md-12 col-lg-8">
                 <h4 class="mb-3"></h4>
                 <form th:action="@{/payment}" th:method="POST" class="needs-validation" novalidate>
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="amount" class="form-label">코인 충전 수량</label>
+                            <label for="amount" class="form-label">코인 충전 수량 </label>
                             <input th:name="amount" type="number" class="form-control" id="amount" placeholder="충전할 수량 입력" required>
                             <div class="invalid-feedback">
                                 충전 수량을 입력해 주세요.
@@ -58,7 +111,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="currency" class="form-label">결제통화</label>
+                            <label for="currency" class="form-label">결제 통화</label>
                             <select th:name="currency" class="form-select" id="currency" required>
                                 <option value="">Choose...</option>
                                 <option th:value="USD" th:utext="US달러"/>
