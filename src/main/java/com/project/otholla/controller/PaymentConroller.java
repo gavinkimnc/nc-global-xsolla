@@ -15,7 +15,7 @@ public class PaymentConroller {
 
     @Autowired
     PaymentService paymentService;
-    
+
     @GetMapping("oshop")
     public String oshop() {
         return "oshop";
@@ -25,11 +25,11 @@ public class PaymentConroller {
     public String payment(
             @RequestParam String myname,
             @RequestParam String currency,
-            @RequestParam String amount,
-            @RequestParam String country
+            @RequestParam String language,
+            @RequestParam String amount
     ) {
 
-        String accessToken = paymentService.token(myname, currency, amount, country);
+        String accessToken = paymentService.token(myname, currency, language, amount);
         return "redirect:" + String.format("https://sandbox-secure.xsolla.com/paystation3/?access_token=%s", accessToken);
     }
 

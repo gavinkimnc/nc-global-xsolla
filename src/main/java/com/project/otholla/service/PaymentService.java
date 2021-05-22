@@ -32,7 +32,7 @@ public class PaymentService {
         String url = String.format("https://api.xsolla.com/merchant/v2/merchants/%s/events/messages", merchant_id);
 
         String authorization_basic_key = Base64.encodeBase64String(api_key.getBytes());
-        log.info(">>>>>>>>>>>; {}", authorization_basic_key);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setBasicAuth(authorization_basic_key);
 
@@ -42,14 +42,14 @@ public class PaymentService {
 
     }
 
-    public String token(String myname, String currency, String amount, String country) {
+    public String token(String myname, String currency, String language, String amount) {
 
         log.info(" GET TOKEN ");
 
         String url = String.format("https://api.xsolla.com/merchant/v2/merchants/%s/token", merchant_id);
 
         String authorization_basic_key = Base64.encodeBase64String(api_key.getBytes());
-        log.info(">>>>>>>>>>>; {}", authorization_basic_key);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setBasicAuth(authorization_basic_key);
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -57,13 +57,13 @@ public class PaymentService {
         String param = "  {\n" +
                 "  \"purchase\": {\n" +
                 "    \"virtual_currency\": {\n" +
-                "      \"quantity\": "+ amount +"\n" +
+                "      \"quantity\": " + amount + "\n" +
                 "    }\n" +
                 "  },\n" +
                 "  \"settings\": {\n" +
                 "    \"mode\": \"sandbox\",\n" +
                 "    \"currency\": \"" + currency + "\",\n" +
-                "    \"language\": \"en\",\n" +
+                "    \"language\": \"" + language + "\",\n" +
                 "    \"project_id\": 132105,\n" +
                 "    \"ui\": {\n" +
                 "      \"components\": {\n" +
@@ -81,11 +81,6 @@ public class PaymentService {
                 "    }\n" +
                 "  },\n" +
                 "  \"user\": {\n" +
-                "    \"country\": {\n" +
-                "      \"allow_modify\": true,\n" +
-                "      \"value\": \"" + country + "\"\n" +
-                "    },\n" +
-                "    \"age\": 19,\n" +
                 "    \"email\": {\n" +
                 "      \"value\": \"fuga@ncsoft.com\"\n" +
                 "    },\n" +
@@ -93,7 +88,7 @@ public class PaymentService {
                 "      \"value\": \"ncsoft\"\n" +
                 "    },\n" +
                 "    \"name\": {\n" +
-                "      \"value\": \"" + "ncsoft" + "\"\n" +
+                "      \"value\": \"" + myname + "\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";

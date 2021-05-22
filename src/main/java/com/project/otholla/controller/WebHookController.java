@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,24 +31,23 @@ public class WebHookController {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody String body, HttpServletRequest request) throws JsonProcessingException {
+    public ResponseEntity webhook(@RequestBody String body, @RequestHeader(value="Authorization") String authorization) throws JsonProcessingException {
 
-        WebHookReq2 requestwebhook = new ObjectMapper().readValue(body,WebHookReq2.class);
+        WebHookReq2 webHookReq = new ObjectMapper().readValue(body, WebHookReq2.class);
 
-        log.info("requestwebhook : {}", requestwebhook);
+        log.info("body : {}", body);
+        log.info("webHookReq : {}", webHookReq);
+        log.info("Authorization: {}", authorization);
 
-        String signature = request.getHeader("Authorization");
-        log.info("signature: {}", signature);
-
-        String notificationType = requestwebhook.getNotificationType();
+        String notificationType = webHookReq.getNotificationType();
 
         if ("user_validation".equalsIgnoreCase(notificationType)) {
-            String userId = requestwebhook.getUser().getId();
+            String userId = webHookReq.getUser().getId();
             return webHookService.validId(userId) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_USER, HttpStatus.NOT_FOUND);
         }
 
         if ("payment".equalsIgnoreCase(notificationType)) {
-            return webHookService.validSignaturePayment(body, signature) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
+            return webHookService.validSignaturePayment(body, authorization) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(HttpStatus.OK);

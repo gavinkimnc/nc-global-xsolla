@@ -11,21 +11,29 @@
 
     <label th:text="사용자명" th:for="myname">이름</label>
     <input type="text" name="myname" th:id="myname" value="오브제" />
-    <br/>
+    <br/><br/>
 
-    <label th:text="통화" th:for="amount">가격</label>
-    <input type="text" name="currency" th:id="currency" value="USD" />
-    <br/>
+    <label th:text="결제통화" th:for="currency">결제통화</label>
+    <select th:name="currency">
+        <option th:value="USD" th:utext="USD"/>
+        <option th:value="EUR" th:utext="EUR"/>
+        <option th:value="KRW" th:utext="KRW"/>
+    </select>
+    <br/><br/>
 
-    <label th:text="가격" th:for="amount">가격</label>
+    <label th:text="코인충전수량" th:for="amount">코인충전수량</label>
     <input type="text" name="amount" th:id="amount" value="1" />
-    <br/>
+    <br/><br/>
 
-    <label th:text="국가" th:for="amount">이름</label>
-    <input type="text" name="country" th:id="country" value="US" />
-    <br/>
+    <label th:text="언어" th:for="language">언어</label>
+    <select th:name="language">
+        <option th:value="en" th:utext="en"/>
+        <option th:value="fr" th:utext="fr"/>
+        <option th:value="kr" th:utext="kr"/>
+    </select>
+    <br/><br/>
 
-    <input type="submit" />
+    <input type="submit" value="충전"/>
 
 </form>
 

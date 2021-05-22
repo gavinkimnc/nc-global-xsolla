@@ -18,15 +18,16 @@ public class WebHookService {
         return id.startsWith("ncsoft");
     }
 
-    public boolean validSignaturePayment(String plainText, String original) {
+    public boolean validSignaturePayment(String plainText, String signature) {
 
         try {
 
-            String hash = "Signature " + sha1(plainText + secretKey);
+            String encoded = "Signature " + sha1(plainText + secretKey);
 
-            log.info(">>>> hashed: {}", hash);
+            log.info(">>>> encoded  \t: {}", encoded);
+            log.info(">>>> signature\t: {}", signature);
 
-            return hash.equalsIgnoreCase(original);
+            return encoded.equals(signature);
 
         } catch (NoSuchAlgorithmException e) {
             log.error("NoSuchAlgorithmException : {}", e.getMessage());
