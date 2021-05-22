@@ -101,7 +101,7 @@ public class PaymentService {
                 "      \"value\": \"ncsoft\"\n" +
                 "    },\n" +
                 "    \"name\": {\n" +
-                "      \"value\": \"" + "gavinkim" + "\"\n" +
+                "      \"value\": \"" + "ncsoft" + "\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";

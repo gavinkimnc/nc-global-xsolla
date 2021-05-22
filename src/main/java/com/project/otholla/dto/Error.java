@@ -1,4 +1,4 @@
-package com.project.otholla.controller;
+package com.project.otholla.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
