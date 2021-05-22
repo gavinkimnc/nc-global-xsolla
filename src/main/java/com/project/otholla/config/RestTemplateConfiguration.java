@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -151,9 +152,9 @@ class RequestResponseLoggingInterceptor implements ClientHttpRequestInterceptor 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
 
-        log.info("REQUEST URI: {}, BODY: {}", request.getURI(), new String(body, "UTF-8"));
+        log.info("REQUEST URI: {}, BODY: {}", request.getURI(), new String(body, StandardCharsets.UTF_8));
         ClientHttpResponse response = execution.execute(request, body);
-        log.info("RESPONSE STATUS CODE: {}, Body: {}", response.getStatusCode(), new String(ByteStreams.toByteArray(response.getBody()), "UTF-8"));
+        log.info("RESPONSE STATUS CODE: {}, Body: {}", response.getStatusCode(), new String(ByteStreams.toByteArray(response.getBody()), StandardCharsets.UTF_8));
 
         return response;
     }
