@@ -35,15 +35,32 @@
 
             var currencyRate = {'USD': 1,  'EUR' : 0.8 , 'KRW' : 1500, '' : 0};
             var currencySymbol = {'USD': '$',  'EUR' : '€' , 'KRW' : '\\', '': ''};
+
             function displayAmount(amount, currency) {
 
                 $(".ocoinAmount").text(amount);
+                $(".currencyText").text(currency);
                 $(".currencySymbol").text(currencySymbol[currency]);
 
                 var paymentAmount =  amount * currencyRate[currency];
-                $(".paymentAmount").text( currency == "EUR"? paymentAmount.toFixed(1) : paymentAmount);
+                $(".paymentAmount").text(formatCommas(currency == "EUR"? paymentAmount.toFixed(1) : paymentAmount));
 
             }
+
+            function formatCommas (psNum) {
+                if (isNaN(psNum))
+                    return "";
+
+                var vsNum = new String(psNum);
+                var veFormat = /(^[+-]?\d+)(\d{3})/;
+
+                while(veFormat.test(vsNum)){
+                    vsNum = vsNum.replace(veFormat, '$1' + ',' + '$2');
+                }
+
+                return vsNum;
+            }
+
 
             $("#amount").change(function() {
                 var currency = $("#currency").val();
@@ -90,7 +107,7 @@
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
+                        <span>Total (<span class="currencyText">USD</span>)</span>
                         <strong><span class="currencySymbol"></span><span class="paymentAmount">0</span></strong>
                     </li>
                 </ul>
