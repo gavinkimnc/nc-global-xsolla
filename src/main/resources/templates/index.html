@@ -38,7 +38,7 @@
 
             function displayAmount(amount, currency) {
 
-                $(".ocoinAmount").text(amount);
+                $(".ocoinAmount").text(formatCommas(amount));
                 $(".currencyText").text(currency);
                 $(".currencySymbol").text(currencySymbol[currency]);
 
@@ -51,7 +51,7 @@
                 if (isNaN(psNum))
                     return "";
 
-                var vsNum = new String(psNum);
+                var vsNum = String(psNum);
                 var veFormat = /(^[+-]?\d+)(\d{3})/;
 
                 while(veFormat.test(vsNum)){
@@ -178,7 +178,7 @@
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; ppc global payment system</p>
+        <p class="mb-1">&copy; ppc. global payment platform</p>
     </footer>
 </div>
 
