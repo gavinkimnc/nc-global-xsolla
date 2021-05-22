@@ -51,7 +51,7 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <label for="amount" class="form-label">코인 충전 수량</label>
-                            <input th:name="amount" type="text" class="form-control" id="amount" placeholder="충전할 수량 입력" required>
+                            <input th:name="amount" type="number" class="form-control" id="amount" placeholder="충전할 수량 입력" required>
                             <div class="invalid-feedback">
                                 충전 수량을 입력해 주세요.
                             </div>
@@ -79,14 +79,14 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="language" class="form-label">LANGUAGE</label>
+                            <label for="language" class="form-label">Language</label>
                             <select th:name="language" class="form-select" id="language" required>
                                 <option th:value="en" th:utext="English"/>
                                 <option th:value="fr" th:utext="Francais"/>
                                 <option th:value="kr" th:utext="한국어"/>
                             </select>
                             <div class="invalid-feedback">
-                                언어를 선택 하세요
+                                Please select a language
                             </div>
                         </div>
 
@@ -108,7 +108,7 @@
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; ppc global pay system</p>
+        <p class="mb-1">&copy; ppc global payment system</p>
     </footer>
 </div>
 
