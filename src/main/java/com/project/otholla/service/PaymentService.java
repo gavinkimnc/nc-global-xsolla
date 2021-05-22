@@ -57,21 +57,13 @@ public class PaymentService {
         String param = "  {\n" +
                 "  \"purchase\": {\n" +
                 "    \"virtual_currency\": {\n" +
-                "      \"quantity\": 1\n" +
-                "    },\n" +
-                "    \"virtual_items\": {\n" +
-                "      \"items\": [\n" +
-                "        {\n" +
-                "          \"amount\": 1,\n" +
-                "          \"sku\": \"SKU01\"\n" +
-                "        }\n" +
-                "      ]\n" +
+                "      \"quantity\": "+ amount +"\n" +
                 "    }\n" +
                 "  },\n" +
                 "  \"settings\": {\n" +
                 "    \"mode\": \"sandbox\",\n" +
                 "    \"currency\": \"" + currency + "\",\n" +
-                "    \"language\": \"kr\",\n" +
+                "    \"language\": \"en\",\n" +
                 "    \"project_id\": 132105,\n" +
                 "    \"ui\": {\n" +
                 "      \"components\": {\n" +
