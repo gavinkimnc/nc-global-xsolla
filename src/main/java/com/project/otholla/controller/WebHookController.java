@@ -31,7 +31,7 @@ public class WebHookController {
 
     @PostMapping("/webhook")
     @ResponseBody
-    public ResponseEntity webhook(@RequestBody String body, @RequestHeader(value="Authorization") String authorization) throws JsonProcessingException {
+    public ResponseEntity webhook(@RequestBody String body, @RequestHeader(value = "Authorization") String authorization) throws JsonProcessingException {
 
         WebHookReq2 webHookReq = new ObjectMapper().readValue(body, WebHookReq2.class);
 

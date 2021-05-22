@@ -16,9 +16,10 @@ public class PaymentConroller {
     @Autowired
     PaymentService paymentService;
 
-    @GetMapping("oshop")
-    public String oshop() {
-        return "oshop";
+    @GetMapping("sample")
+    public String sample() {
+        paymentService.authenticationSample();
+        return "index";
     }
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/payment")

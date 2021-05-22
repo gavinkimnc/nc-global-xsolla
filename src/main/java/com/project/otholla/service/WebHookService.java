@@ -1,7 +1,5 @@
 package com.project.otholla.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.project.otholla.controller.request.WebHookReq2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +38,8 @@ public class WebHookService {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
         byte[] result = mDigest.digest(input.getBytes());
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < result.length; i++) {
-            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        for (byte b : result) {
+            sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         }
 
         return sb.toString();
