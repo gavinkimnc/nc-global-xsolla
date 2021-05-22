@@ -1,16 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Checkout example · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.0/examples/checkout/form-validation.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/5.0/examples/checkout/form-validation.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-PROJECT - OTHOLLA <br>
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="https://wstatic-cdn.plaync.com/nshop2/v3/nshop/image/sprite/icoCoin2020.png" alt="" >
+            <h2>오벤져스 충전 센터</h2>
+            <p class="lead"></p>
+        </div>
 
-<a href="/oshop">오벤져스 샵</a>
+        <div class="row g-5">
 
+            <div class="col-md-12 col-lg-8">
+                <h4 class="mb-3"></h4>
+                <form th:action="@{/payment}" th:method="POST" class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="amount" class="form-label">코인 충전 수량</label>
+                            <input th:name="amount" type="text" class="form-control" id="amount" placeholder="충전할 수량 입력" required>
+                            <div class="invalid-feedback">
+                                충전 수량을 입력해 주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="currency" class="form-label">결제통화</label>
+                            <select th:name="currency" class="form-select" id="currency" required>
+                                <option value="">Choose...</option>
+                                <option th:value="USD" th:utext="US달러"/>
+                                <option th:value="EUR" th:utext="유로화"/>
+                                <option th:value="KRW" th:utext="원화"/>
+                            </select>
+                            <div class="invalid-feedback">
+                                통화를 선택 하세요
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="myname" class="form-label">사용자명</label>
+                            <input th:name="myname" type="text" class="form-control" id="myname" placeholder="" value="오리온" required>
+                            <div class="invalid-feedback">
+                                사용자명을 입력해주세요.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="language" class="form-label">언어</label>
+                            <select th:name="language" class="form-select" id="language" required>
+                                <option th:value="en" th:utext="영어"/>
+                                <option th:value="fr" th:utext="프랑스어"/>
+                                <option th:value="kr" th:utext="한국어"/>
+                            </select>
+                            <div class="invalid-feedback">
+                                언어를 선택 하세요
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="agree-info" required>
+                        <label class="form-check-label" for="agree-info">충전 약관에 절대적으로 동의합니다.</label>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">충전하기</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; ppc</p>
+    </footer>
+</div>
+
+
+<script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://getbootstrap.com/docs/5.0/examples/checkout/form-validation.js"></script>
 </body>
-
-
 </html>
