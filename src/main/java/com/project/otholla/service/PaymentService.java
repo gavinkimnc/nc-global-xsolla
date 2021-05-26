@@ -42,7 +42,7 @@ public class PaymentService {
 
     }
 
-    public String token(String myname, String currency, String language, String amount) {
+    public String token(String myname, String currency, String language, String amount, String country) {
 
         log.info(" GET TOKEN ");
 
@@ -81,6 +81,10 @@ public class PaymentService {
                 "    }\n" +
                 "  },\n" +
                 "  \"user\": {\n" +
+                "    \"country\": {\n" +
+                "      \"allow_modify\": true,\n" +
+                "      \"value\": \"" + country + "\"\n" +
+                "    },\n" +
                 "    \"email\": {\n" +
                 "      \"value\": \"fuga@ncsoft.com\"\n" +
                 "    },\n" +

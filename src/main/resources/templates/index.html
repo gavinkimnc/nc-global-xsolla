@@ -141,6 +141,16 @@
                         </div>
 
                         <div class="col-12">
+                            <label for="country" class="form-label">국가</label>
+                            <select th:name="country" class="form-select" id="country" required>
+                                <option th:each="i : ${#locale.getISOCountries()}" th:value="${i}" th:text="${i}" th:selected="${#locale.country eq i}">
+                            </select>
+                            <div class="invalid-feedback">
+                                통화를 선택 하세요
+                            </div>
+                        </div>
+
+                        <div class="col-12">
                             <label for="myname" class="form-label">사용자명</label>
                             <input th:name="myname" type="text" class="form-control" id="myname" placeholder="" value="오브제" required>
                             <div class="invalid-feedback">
@@ -151,9 +161,9 @@
                         <div class="col-12">
                             <label for="language" class="form-label">Language</label>
                             <select th:name="language" class="form-select" id="language" required>
-                                <option th:value="en" th:utext="English"/>
-                                <option th:value="fr" th:utext="Francais"/>
-                                <option th:value="kr" th:utext="한국어"/>
+                                <option th:value="en" th:utext="English" th:selected="${#locale.language eq 'en'}" />
+                                <option th:value="fr" th:utext="Francais" th:selected="${#locale.language eq 'fr'}" />
+                                <option th:value="ko" th:utext="한국어" th:selected="${#locale.language eq 'ko'}" />
                             </select>
                             <div class="invalid-feedback">
                                 Please select a language
