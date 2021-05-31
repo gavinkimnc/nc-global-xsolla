@@ -40,6 +40,7 @@ public class WebHookController {
         log.info("Authorization: {}", authorization);
 
         String notificationType = webHookReq.getNotificationType();
+        Integer projectId = webHookReq.getSettings().getProjectId();
 
         if ("user_validation".equalsIgnoreCase(notificationType)) {
             String userId = webHookReq.getUser().getId();
@@ -47,7 +48,7 @@ public class WebHookController {
         }
 
         if ("payment".equalsIgnoreCase(notificationType)) {
-            return webHookService.validSignaturePayment(body, authorization) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
+            return webHookService.validSignature(body, authorization, projectId) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(HttpStatus.OK);
