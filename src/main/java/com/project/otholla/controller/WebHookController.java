@@ -36,13 +36,14 @@ public class WebHookController {
 
         String projectName = oProjectName.isPresent() ? oProjectName.get() : "ovengers";
         WebHookReq2 webHookReq = new ObjectMapper().readValue(body, WebHookReq2.class);
+        String notificationType = webHookReq.getNotificationType();
 
         log.info("projectName : {}", projectName);
         log.info("body : {}", body);
         log.info("webHookReq : {}", webHookReq);
+        log.info("notificationType : {}", notificationType);
         log.info("Authorization: {}", authorization);
 
-        String notificationType = webHookReq.getNotificationType();
 
         if ("user_validation".equalsIgnoreCase(notificationType)) {
             String userId = webHookReq.getUser().getId();
@@ -50,6 +51,7 @@ public class WebHookController {
         }
 
         if ("payment".equalsIgnoreCase(notificationType) || "order_paid".equalsIgnoreCase(notificationType)) {
+            log.info("validSignature");
             return webHookService.validSignature(body, authorization, projectName) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
         }
 

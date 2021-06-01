@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class WebHookService {
 
     Map secretKey = Maps.newHashMap();
 
+    @PostConstruct
     private void init() {
         secretKey.put("ovengers", "U-CWaZHflG80f5KKMn__B");       //오벤져스
         secretKey.put("covengers", "45107c6b-9dac-463e-add9-46d44ace14bc");//코벤져스
@@ -24,6 +26,8 @@ public class WebHookService {
     }
 
     public boolean validSignature(String plainText, String signature, String projectName) {
+
+        log.info("secretKey : {}", secretKey);
 
         if (!secretKey.containsKey(projectName)) {
             return false;
