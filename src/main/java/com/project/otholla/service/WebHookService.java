@@ -31,6 +31,11 @@ public class WebHookService {
 
         try {
             String encoded = "Signature " + sha1(plainText + secretKey.get(projectName));
+
+            log.info(">>>> secretKey\t: {}", secretKey.get(projectName));
+            log.info(">>>> encoded  \t: {}", encoded);
+            log.info(">>>> signature\t: {}", signature);
+
             return encoded.equals(signature);
 
         } catch (NoSuchAlgorithmException e) {
