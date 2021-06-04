@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- // NCoin Common JS -->
+<p th:text="OVENGERSSHOP">
+
+<table border="1">
+    <thead>
+    <th>SKU</th>
+    <th>이름</th>
+    <th>수량</th>
+    <th>잔여수량</th>
+    <th>아이템 타입</th>
+    </thead>
+    <tbody>
+    <tr th:each="item, i: ${inventory.items}">
+        <td th:text="${item.sku}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.remaining_uses}"></td>
+        <td th:text="${item.virtual_item_type}"></td>
+        <td><input type="button" value="소비" onclick="consume(this);" th:data-userid="${userid}" th:data-sku="${item.sku}"> </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script>
+    function consume(val) {
+        var sku = $(val).data("sku");
+        var userid = $(val).data("userid");
+        var popUrl = "/jshop/inventory/" + userid + "/item/" + sku + "/consume";
+        var popOption = "top=10, left=10, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no";
+        window.open(popUrl, popOption);
+    }
+</script>
+</body>
+</html>

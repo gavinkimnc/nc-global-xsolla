@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+
+<input type="button" value="구매하기" onclick="purchase();"/>
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var token = [[${token}]];
+
+    /*]]>*/
+
+    function purchase(){
+        location.href = "https://sandbox-secure.xsolla.com/paystation2/?access_token=" + token;
+    }
+</script>
+</body>
+</html>

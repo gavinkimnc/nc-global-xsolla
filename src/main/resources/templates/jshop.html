@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<!-- // NCoin Common JS -->
+<p th:text="OVENGERSSHOP">
+
+<table>
+    <tbody>
+    <tr th:each="item, i: ${items}">
+        <td><a th:href="@{'/jshop/purchase/' + ${item.sku}}"><img width="100" height="100" th:src="@{${item.image_url}}"/></a></td>
+        <td th:text="${item.sku}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.price.amount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

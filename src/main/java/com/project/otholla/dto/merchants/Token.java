@@ -6,5 +6,6 @@ import lombok.Data;
 public class Token {
 
     String token;
+    String order_id;
 
 }

@@ -1,0 +1,148 @@
+POST https://store.xsolla.com/api/v2/project/132105/inventory/account/signin
+Authorization: Basic MjAyNzI0OjAxNjJkYWQ4MjJkMDQxOTBmNTc4MDgwYzJlNDg2OWUx
+Content-Type: application/json
+
+{
+  "user_id": "test123123124",
+  "platform": "pc_other"
+}
+
+###
+POST https://login.xsolla.com/api/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_secret=string&client_id=string
+
+###
+POST https://store.xsolla.com/api/v2/project/130685/inventory/account/signin
+Authorization: Basic OTI2ZTJmZmRjZjA1NGM1ZjcyMmJhNjNjZDUzMTJjOTg=
+Content-Type: application/json
+
+{
+  "platform": "pc_other",
+  "user_id": "1234"
+}
+
+###
+POST https://store.xsolla.com/api/v2/project/44056/inventory/account/signin
+Authorization: Basic eyQkLmVudi51c2VybmFtZX06eyQkLmVudi5wYXNzd29yZH0=
+Content-Type: application/json
+
+{
+  "platform": "pc_other",
+  "user_id": "211245125"
+}
+
+
+###
+GET https://store.xsolla.com/api/v2/project/132105/user/inventory/items
+Authorization: Basic MjAyNzI0OjAxNjJkYWQ4MjJkMDQxOTBmNTc4MDgwYzJlNDg2OWUx
+
+###
+
+GET https://store.xsolla.com/api/v2/project/44056/items/virtual_items
+
+
+###
+
+GET https://store.xsolla.com/api/v2/project/132105/user/inventory/items
+authorization: Bearer dtrqCOzWjq28zodZGHufxWGUJuJToVrI
+
+###
+
+POST https://store.xsolla.com/api/v2/project/132105/payment/item/sku-nc-lm2
+authorization: Bearer ZHRycTBDNUJpSDlLOEpmOEFoemJ3M09aUGJLZW9wQ0Y=
+Content-Type: application/json
+
+{
+  "sandbox": true,
+  "settings": {
+    "ui": {
+      "size": "large",
+      "theme": "default",
+      "version": "desktop",
+      "desktop": {
+        "header": {
+          "is_visible": true,
+          "visible_logo": true,
+          "visible_name": true,
+          "visible_purchase": true,
+          "type": "normal",
+          "close_button": false
+        }
+      },
+      "mobile": {
+        "footer": {
+          "is_visible": true
+        },
+        "header": {
+          "close_button": false
+        }
+      }
+    }
+  },
+  "custom_parameters": {
+    "character_id": "ingameUsername"
+  }
+}
+
+###
+
+POST https://store.xsolla.com/api/v2/project/132105/payment
+Authorization: Bearer dtrqrj4A8FxZcNvSPQZdGiGfgXz9uP25
+Content-Type: application/json
+
+{
+  "purchase": {
+    "checkout": {
+      "amount": 10.5,
+      "currency": "USD"
+    },
+    "description": {
+      "value": "My purchase."
+    }
+  }
+}
+
+###
+
+GET https://store.xsolla.com/api/v2/project/132105/order/952319
+Authorization: Bearer dtrqFqFX11FDrnVE4y8uNY4yhcdRXqhq
+Content-Type: application/json
+
+
+###
+
+POST https://api.xsolla.com/merchant/v2/merchants/202724/token
+Authorization: Basic MjAyNzI0OjAxNjJkYWQ4MjJkMDQxOTBmNTc4MDgwYzJlNDg2OWUx
+Content-Type: application/json
+
+{
+  "settings": {
+    "currency": "USD",
+    "language": "en",
+    "project_id": 132105
+  },
+  "user": {
+    "country": {
+      "allow_modify": false,
+      "value": "US"
+    },
+    "age": 20,
+    "email": {
+      "value": "gavinkim@ncsoft.com"
+    },
+    "id": {
+      "value": "ncsoft-gavinkim1"
+    },
+    "name": {
+      "value": "gavinkim"
+    }
+  }
+}
+
+
+###
+
+GET https://store.xsolla.com/api/v2/project/132105/inventory/reward
+Authorization: Basic MjAyNzI0OjAxNjJkYWQ4MjJkMDQxOTBmNTc4MDgwYzJlNDg2OWUx
