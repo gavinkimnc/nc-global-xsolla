@@ -19,6 +19,7 @@ public class WebHookService {
     private void init() {
         secretKey.put("ovengers", "U-CWaZHflG80f5KKMn__B");       //오벤져스
         secretKey.put("covengers", "45107c6b-9dac-463e-add9-46d44ace14bc");//코벤져스
+        log.info("initialize secretKey : {}", secretKey);
     }
 
     public boolean validId(String id) {
@@ -27,16 +28,15 @@ public class WebHookService {
 
     public boolean validSignature(String plainText, String signature, String projectName) {
 
-        log.info("secretKey : {}", secretKey);
-
         if (!secretKey.containsKey(projectName)) {
+            log.error("NOT SUPPORT PROJECT {}", projectName);
             return false;
         }
 
         try {
             String encoded = "Signature " + sha1(plainText + secretKey.get(projectName));
 
-            log.info(">>>> secretKey\t: {}", secretKey.get(projectName));
+            log.info(">>>> result   \t: {}", encoded.equals(signature));
             log.info(">>>> encoded  \t: {}", encoded);
             log.info(">>>> signature\t: {}", signature);
 
